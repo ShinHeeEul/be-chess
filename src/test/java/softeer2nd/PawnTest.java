@@ -12,12 +12,20 @@ public class PawnTest {
     @Test
     @DisplayName("Pawn Create Validation")
     void create() {
+        String color;
         //흰색 폰
-        Pawn pawn = new Pawn("white");
-        assertThat(pawn.getColor()).isEqualTo("white");
+        color = "white";
+        Pawn pawn = new Pawn(color);
+        verifyPawn(pawn, color);
+
         //검은 폰
-        Pawn pawn2 = new Pawn("black");
-        assertThat(pawn2.getColor()).isEqualTo("black");
+        color = "black";
+        pawn = new Pawn(color);
+        verifyPawn(pawn, color);
+    }
+
+    private static void verifyPawn(final Pawn pawn, final String color) {
+        assertThat(pawn.getColor()).isEqualTo(color);
     }
 
 
