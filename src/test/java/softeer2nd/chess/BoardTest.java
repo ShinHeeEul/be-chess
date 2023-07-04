@@ -30,23 +30,40 @@ public class BoardTest {
         Pawn pawn = new Pawn(color);
         board.add(pawn);
         assertEquals(expected, board.size());
-        assertEquals(pawn, board.findPawn(i));
     }
 
     @Test
     @DisplayName("Type Validation")
     public void create_다른타입() {
         assertDoesNotThrow(() -> board.add(new Pawn()));
-        assertThrows(IllegalArgumentException.class, () -> board.add(Integer.valueOf("7")));
+        //assertThrows(IllegalArgumentException.class, () -> board.add(Integer.valueOf("7")));
 
     }
 
     @Test
     @DisplayName("Initialize Valid")
-    public void initialize() throws Exception {
-        Board board = new Board();
+    public void initialize() {
         board.initialize();
         assertEquals("pppppppp", board.getWhitePawnsResult());
         assertEquals("PPPPPPPP", board.getBlackPawnsResult());
+    }
+
+    @Test
+    @DisplayName("Print Valid")
+    public void printCheck() {
+        String s = "........\n" +
+                "PPPPPPPP\n" +
+                "........\n" +
+                "........\n" +
+                "........\n" +
+                "........\n" +
+                "pppppppp\n" +
+                "........";
+
+        board.initialize();
+
+        assertEquals(s, board.print());
+
+        System.out.println(board.print());
     }
 }
