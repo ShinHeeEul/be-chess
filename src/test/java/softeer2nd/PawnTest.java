@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import softeer2nd.Unit.Color;
 import softeer2nd.Unit.Pawn;
 
 public class PawnTest {
@@ -14,11 +13,11 @@ public class PawnTest {
     @Test
     @DisplayName("Pawn Create Validation")
     void create() {
-        verifyPawn(Color.WHITE);
-        verifyPawn(Color.BLACK);
+        verifyPawn(Pawn.WHITE_COLOR);
+        verifyPawn(Pawn.BLACK_COLOR);
     }
 
-    private static void verifyPawn(final Color color) {
+    private static void verifyPawn(final String color) {
         Pawn pawn = new Pawn(color);
         assertThat(pawn.getColor()).isEqualTo(color);
     }
