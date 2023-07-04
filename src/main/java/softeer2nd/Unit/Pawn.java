@@ -2,13 +2,15 @@ package softeer2nd.Unit;
 
 public class Pawn {
 
-    private String color;
+    private final Color color;
     private String[] location;
-    public Pawn(String color) {
+
+    public Pawn() {this.color = Color.WHITE;}
+    public Pawn(Color color) {
         this.color = color;
     }
 
-    public String getColor() {
+    public Color getColor() {
         return this.color;
     }
 }
