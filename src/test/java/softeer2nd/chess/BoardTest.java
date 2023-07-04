@@ -21,24 +21,21 @@ public class BoardTest {
     @Test
     @DisplayName("Board Create Validation")
     public void create() throws Exception {
+        validAddPawn(Pawn.WHITE_COLOR, 1, 0);
+        validAddPawn(Pawn.BLACK_COLOR, 2, 1);
+    }
 
-        Pawn white = new Pawn(Pawn.WHITE_COLOR);
-        board.add(white);
-        assertEquals(1, board.size());
-        assertEquals(white, board.findPawn(0));
-
-        Pawn black = new Pawn(Pawn.BLACK_COLOR);
-        board.add(black);
-        assertEquals(2, board.size());
-        assertEquals(black, board.findPawn(1));
+    private void validAddPawn(String color, int expected, int i) {
+        Pawn pawn = new Pawn(color);
+        board.add(pawn);
+        assertEquals(expected, board.size());
+        assertEquals(pawn, board.findPawn(i));
     }
 
     @Test
     @DisplayName("Type Validation")
     public void create_다른타입() {
-
         assertDoesNotThrow(() -> board.add(new Pawn()));
-
         assertThrows(IllegalArgumentException.class, () -> board.add(Integer.valueOf("7")));
 
     }
