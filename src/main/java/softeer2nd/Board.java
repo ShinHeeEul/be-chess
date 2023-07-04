@@ -11,8 +11,13 @@ public class Board {
     public Board() {
         board = new ArrayList<>();
     }
-    public void add(final Pawn pawn) {
-        board.add(pawn);
+    public void add(Object o) {
+        if(o.getClass().equals(Pawn.class)) {
+            board.add((Pawn) o);
+            return;
+        }
+        throw new IllegalArgumentException("말의 타입이 일치하지 않습니다.");
+
     }
 
     public int size() {
