@@ -1,13 +1,11 @@
 package softeer2nd.chess;
 
 import softeer2nd.chess.pieces.Pawn;
-
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static softeer2nd.utils.StringUtils.appendNewLine;
 
 public class Board {
 
@@ -16,6 +14,7 @@ public class Board {
     private final List<Pawn> blackPawn;
     private final List<Pawn> whitePawn;
     private final char[][] board;
+
 
     public Board() {
 
@@ -105,10 +104,12 @@ public class Board {
     public String print() {
         StringBuilder sb = new StringBuilder();
         for(int i = 0; i < BOARD_COL; i++) {
+            String s = "";
             for(int j = 0; j < BOARD_ROW; j++) {
-                sb.append(board[i][j]);
+                s += board[i][j];
             }
-            if(i != 7) sb.append("\n");
+            sb.append(appendNewLine(s));
+
         }
         return sb.toString();
     }
