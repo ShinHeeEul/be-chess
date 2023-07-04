@@ -4,8 +4,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import softeer2nd.Board;
 import softeer2nd.chess.pieces.Pawn;
+
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -38,5 +39,14 @@ public class BoardTest {
         assertDoesNotThrow(() -> board.add(new Pawn()));
         assertThrows(IllegalArgumentException.class, () -> board.add(Integer.valueOf("7")));
 
+    }
+
+    @Test
+    @DisplayName("Initialize Valid")
+    public void initialize() throws Exception {
+        Board board = new Board();
+        board.initialize();
+        assertEquals("pppppppp", board.getWhitePawnsResult());
+        assertEquals("PPPPPPPP", board.getBlackPawnsResult());
     }
 }
