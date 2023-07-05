@@ -6,7 +6,7 @@ public abstract class Piece {
 
     public static final String WHITE_COLOR = "white";
     public static final String BLACK_COLOR = "black";
-    public static final char ROW_ALPHABET = 'A';
+    public static final char ROW_ALPHABET = 'a';
     protected String color;
     protected String name;
     protected String location = "";

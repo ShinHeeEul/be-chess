@@ -41,26 +41,26 @@ public class Board {
             createPiece(Pawn.NAME, Piece.WHITE_COLOR, (char) (ROW_ALPHABET + i) + "" + 2);
             createPiece(Pawn.NAME, Piece.BLACK_COLOR, (char) (ROW_ALPHABET + i) + "" + 7);
         }
-        createPiece(King.NAME, Piece.WHITE_COLOR, "E1");
-        createPiece(King.NAME, Piece.BLACK_COLOR, "E8");
+        createPiece(King.NAME, Piece.WHITE_COLOR, "e1");
+        createPiece(King.NAME, Piece.BLACK_COLOR, "e8");
 
-        createPiece(Queen.NAME, Piece.WHITE_COLOR, "D1");
-        createPiece(Queen.NAME, Piece.BLACK_COLOR, "D8");
+        createPiece(Queen.NAME, Piece.WHITE_COLOR, "d1");
+        createPiece(Queen.NAME, Piece.BLACK_COLOR, "d8");
 
-        createPiece(Bishop.NAME, Piece.WHITE_COLOR, "C1");
-        createPiece(Bishop.NAME, Piece.WHITE_COLOR, "F1");
-        createPiece(Bishop.NAME, Piece.BLACK_COLOR, "C8");
-        createPiece(Bishop.NAME, Piece.BLACK_COLOR, "F8");
+        createPiece(Bishop.NAME, Piece.WHITE_COLOR, "c1");
+        createPiece(Bishop.NAME, Piece.WHITE_COLOR, "f1");
+        createPiece(Bishop.NAME, Piece.BLACK_COLOR, "c8");
+        createPiece(Bishop.NAME, Piece.BLACK_COLOR, "f8");
 
-        createPiece(Knight.NAME, Piece.WHITE_COLOR, "B1");
-        createPiece(Knight.NAME, Piece.WHITE_COLOR, "G1");
-        createPiece(Knight.NAME, Piece.BLACK_COLOR, "B8");
-        createPiece(Knight.NAME, Piece.BLACK_COLOR, "G8");
+        createPiece(Knight.NAME, Piece.WHITE_COLOR, "b1");
+        createPiece(Knight.NAME, Piece.WHITE_COLOR, "g1");
+        createPiece(Knight.NAME, Piece.BLACK_COLOR, "b8");
+        createPiece(Knight.NAME, Piece.BLACK_COLOR, "g8");
 
-        createPiece(Rook.NAME, Piece.WHITE_COLOR, "A1");
-        createPiece(Rook.NAME, Piece.WHITE_COLOR, "H1");
-        createPiece(Rook.NAME, Piece.BLACK_COLOR, "A8");
-        createPiece(Rook.NAME, Piece.BLACK_COLOR, "H8");
+        createPiece(Rook.NAME, Piece.WHITE_COLOR, "a1");
+        createPiece(Rook.NAME, Piece.WHITE_COLOR, "h1");
+        createPiece(Rook.NAME, Piece.BLACK_COLOR, "a8");
+        createPiece(Rook.NAME, Piece.BLACK_COLOR, "h8");
 
     }
 
