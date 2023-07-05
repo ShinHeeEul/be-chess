@@ -1,14 +1,12 @@
 package softeer2nd.chess;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import softeer2nd.chess.pieces.Pawn;
-
-import java.io.IOException;
+import softeer2nd.chess.pieces.Piece;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static softeer2nd.chess.pieces.Pawn.createWhitePawn;
 
 
 public class BoardTest {
@@ -21,23 +19,14 @@ public class BoardTest {
 
     @Test
     @DisplayName("Board Create Validation")
-    public void create() throws Exception {
-        validAddPawn(Pawn.WHITE_COLOR, 1, 0);
-        validAddPawn(Pawn.BLACK_COLOR, 2, 1);
+    public void create() {
+        validAddPawn(1);
     }
 
-    private void validAddPawn(String color, int expected, int i) {
-        Pawn pawn = new Pawn(color);
-        board.add(pawn);
+    private void validAddPawn(int expected) {
+        Piece piece = createWhitePawn();
+        board.add(piece);
         assertEquals(expected, board.size());
-    }
-
-    @Test
-    @DisplayName("Type Validation")
-    public void create_다른타입() {
-        assertDoesNotThrow(() -> board.add(new Pawn()));
-        //assertThrows(IllegalArgumentException.class, () -> board.add(Integer.valueOf("7")));
-
     }
 
     @Test
@@ -51,14 +40,15 @@ public class BoardTest {
     @Test
     @DisplayName("Print Valid")
     public void printCheck() {
-        String s = "........\n" +
-                "PPPPPPPP\n" +
-                "........\n" +
-                "........\n" +
-                "........\n" +
-                "........\n" +
-                "pppppppp\n" +
-                "........";
+        String s = """
+                ........
+                PPPPPPPP
+                ........
+                ........
+                ........
+                ........
+                pppppppp
+                ........""";
 
         board.initialize();
 

@@ -1,41 +1,30 @@
 package softeer2nd.chess.pieces;
 
-public class Pawn {
 
-    public static final String WHITE_COLOR = "white";
-    public static final String BLACK_COLOR = "black";
-
-    public static final char WHITE_REPRESENTATION = 'p';
-    public static final char BLACK_REPRESENTATION = 'P';
-    public static final char EMPTY_REPRESENTATION = '.';
-
-    private final String color;
-    private String location;
-
-    public Pawn() {
-        this.color = WHITE_COLOR;
-    }
-    public Pawn(String color) {
+public class Pawn extends Piece{
+    public static final String NAME = "pawn";
+    public static final char WHITE_PAWN_REPRESENTATION = 'p';
+    public static final char BLACK_PAWN_REPRESENTATION = 'P';
+    private Pawn(final String color, String name) {
         this.color = color;
+        this.name = name;
     }
 
-    public Pawn(String color, String location) {
-        this.color = color;
-        this.location = location;
+    public static Pawn createWhitePawn() {
+        return new Pawn(WHITE_COLOR, NAME);
     }
 
-    public String getColor() {
-        return this.color;
+    public static Pawn createBlackPawn() {
+        return new Pawn(BLACK_COLOR, NAME);
     }
 
-    public String getLocation() {
-        return this.location;
-    }
 
+
+    @Override
     public char getRepresentation() {
-        if(this.color == WHITE_COLOR) {
-            return WHITE_REPRESENTATION;
+        if(this.getColor().equals(BLACK_COLOR)) {
+            return BLACK_PAWN_REPRESENTATION;
         }
-        return BLACK_REPRESENTATION;
+        return WHITE_PAWN_REPRESENTATION;
     }
 }
