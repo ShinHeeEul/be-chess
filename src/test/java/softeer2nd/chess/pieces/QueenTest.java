@@ -4,8 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static softeer2nd.chess.pieces.King.createBlackKing;
-import static softeer2nd.chess.pieces.King.createWhiteKing;
 import static softeer2nd.chess.pieces.Piece.Color.*;
 import static softeer2nd.chess.pieces.Queen.*;
 

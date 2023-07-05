@@ -21,16 +21,15 @@ public abstract class Piece {
     }
 
     public boolean isBlack() {
-
-        return this.color.equals(BLACK)?true:false;
+        return this.color.equals(BLACK);
     }
 
     public boolean isWhite() {
-        return this.color.equals(WHITE)?true:false;
+        return this.color.equals(WHITE);
     }
 
     public boolean isEmpty() {
-        return this.color.equals(EMPTY)?true:false;
+        return this.color.equals(EMPTY);
     }
 
     public Type getType() {

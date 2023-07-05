@@ -8,8 +8,8 @@ public enum Type {
     QUEEN('q', "queen"),
     KING('k', "king"),
     NO_PIECE('.', "empty");
-    private char representation;
-    private String name;
+    private final char representation;
+    private final String name;
     Type(char representation, String name) {
         this.representation = representation;
         this.name = name;
@@ -26,7 +26,6 @@ public enum Type {
     public char getBlankRepresentation() {
         return representation;
     }
-
 
     public String getName() {
         return name;
