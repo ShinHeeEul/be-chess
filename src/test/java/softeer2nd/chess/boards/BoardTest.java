@@ -1,4 +1,4 @@
-package softeer2nd.chess;
+package softeer2nd.chess.boards;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
