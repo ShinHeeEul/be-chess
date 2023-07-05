@@ -14,9 +14,6 @@ import org.junit.jupiter.api.Test;
 
 public class PieceTest {
 
-
-
-
     private static void verifyPiece(final Piece piece, final String color, final char representation) {
         assertEquals(color, piece.getColor());
         assertEquals(representation, piece.getRepresentation());
@@ -24,7 +21,7 @@ public class PieceTest {
 
     @Test
     @DisplayName("Piece Validation")
-    void create_piece() {
+    void createPiece() {
         verifyPiece(createWhitePawn(), Piece.WHITE_COLOR, WHITE_PAWN_REPRESENTATION);
         verifyPiece(createBlackPawn(), Piece.BLACK_COLOR, BLACK_PAWN_REPRESENTATION);
 
@@ -45,6 +42,19 @@ public class PieceTest {
         verifyPiece(createBlackBishop(), Piece.BLACK_COLOR, BLACK_BISHOP_REPRESENTATION);
     }
 
+    @Test
+    @DisplayName("Color Validation")
+    public void validColor() {
+        verifyColor(createWhiteBishop());
+        verifyColor(createBlackBishop());
+    }
 
+    private void verifyColor(Piece piece) {
+        if(piece.isBlack()) {
+            assertEquals(piece.getColor(), Piece.BLACK_COLOR);
+        } else {
+            assertEquals(piece.getColor(), Piece.WHITE_COLOR);
+        }
+    }
 
 }

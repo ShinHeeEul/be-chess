@@ -8,7 +8,6 @@ public abstract class Piece {
     public static final String BLACK_COLOR = "black";
     public static final char ROW_ALPHABET = 'A';
     protected String color;
-    // 기물 종류
     protected String name;
     protected String location = "";
 
@@ -17,6 +16,13 @@ public abstract class Piece {
         return this.color;
     }
 
+    public boolean isBlack() {
+        return this.color.equals(BLACK_COLOR)?true:false;
+    }
+
+    public boolean isWhite() {
+        return this.color.equals(WHITE_COLOR)?true:false;
+    }
 
     public void setLocation(String location) {
         this.location = location;
