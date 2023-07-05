@@ -18,15 +18,14 @@ public class Board {
 
     private static final int BOARD_ROW = 8;
     private static final int BOARD_COL = 8;
-
     public static final char EMPTY = '.';
+
     private final List<Piece> blackPiece;
     private final List<Piece> whitePiece;
     private final char[][] board;
 
 
     public Board() {
-
         blackPiece = new ArrayList<>();
         whitePiece = new ArrayList<>();
 
@@ -35,17 +34,7 @@ public class Board {
             Arrays.fill(board[i], EMPTY);
         }
     }
-    public void add(Piece piece) {
-        if(piece.getColor().equals(Piece.WHITE_COLOR)) {
-            whitePiece.add(piece);
-        } else {
-            blackPiece.add(piece);
-        }
-    }
 
-    public int size() {
-        return whitePiece.size() + blackPiece.size();
-    }
 
     public void initialize() {
         for(int i = 0; i < BOARD_COL; i++) {
@@ -120,9 +109,9 @@ public class Board {
                     return createBlackKnight();
                 return createWhiteKnight();
             case Bishop.NAME:
-                    if(color.equals(BLACK_COLOR))
-                        return createBlackBishop();
-                    return createWhiteBishop();
+                if(color.equals(BLACK_COLOR))
+                    return createBlackBishop();
+                return createWhiteBishop();
         }
         return null;
     }
@@ -138,20 +127,12 @@ public class Board {
             board[col][row] = p.getRepresentation();
     }
 
-    public String getWhitePawnsResult() {
-        return getPawns(Piece.WHITE_COLOR);
-    }
-
-    public String getBlackPawnsResult() {
-        return getPawns(Piece.BLACK_COLOR);
-    }
-
     /**
-     * 색에 해당하는 Pawn List의 값들을 String으로 만들어 반환
+     * 색에 해당하는 Pieces List의 값들을 String으로 만들어 반환
      * @param color 색
-     * @return 색에 해당하는 Pawn String 반환
+     * @return 색에 해당하는 Pieces String 반환
      */
-    private String getPawns(String color) {
+    private String getPieces(String color) {
         StringBuilder sb = new StringBuilder();
         List<Piece> pieces = getPieceList(color);
 
@@ -172,6 +153,10 @@ public class Board {
     }
 
 
+    /**
+     * 보드를 보여주는 함수
+     * @return 보드를 String으로 표현한 값
+     */
     public String showBoard() {
         StringBuilder sb = new StringBuilder();
         for(int i = 0; i < BOARD_COL; i++) {
