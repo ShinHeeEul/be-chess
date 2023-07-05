@@ -13,7 +13,7 @@ public class Main {
                 case "start":
                     Board board = new Board();
                     board.initialize();
-                    System.out.println(board.print());
+                    System.out.println(board.showBoard());
                     break;
                 case "end":
                     scan.close();

@@ -3,8 +3,8 @@ package softeer2nd.chess.pieces;
 
 public class Knight extends Piece{
     public static final String NAME = "knight";
-    public static final char WHITE_KNIGHT_REPRESENTATION = 'k';
-    public static final char BLACK_KNIGHT_REPRESENTATION = 'K';
+    public static final char WHITE_KNIGHT_REPRESENTATION = 'n';
+    public static final char BLACK_KNIGHT_REPRESENTATION = 'N';
     private Knight(final String color, String name) {
         this.color = color;
         this.name = name;

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static softeer2nd.chess.pieces.Bishop.*;
 import static softeer2nd.chess.pieces.King.*;
 import static softeer2nd.chess.pieces.Knight.*;
 import static softeer2nd.chess.pieces.Pawn.*;
@@ -37,8 +38,7 @@ public class Board {
     public void add(Piece piece) {
         if(piece.getColor().equals(Piece.WHITE_COLOR)) {
             whitePiece.add(piece);
-        }
-        else {
+        } else {
             blackPiece.add(piece);
         }
     }
@@ -52,6 +52,27 @@ public class Board {
             createPiece(Pawn.NAME, Piece.WHITE_COLOR, (char) (ROW_ALPHABET + i) + "" + 2);
             createPiece(Pawn.NAME, Piece.BLACK_COLOR, (char) (ROW_ALPHABET + i) + "" + 7);
         }
+        createPiece(King.NAME, Piece.WHITE_COLOR, "E1");
+        createPiece(King.NAME, Piece.BLACK_COLOR, "E8");
+
+        createPiece(Queen.NAME, Piece.WHITE_COLOR, "D1");
+        createPiece(Queen.NAME, Piece.BLACK_COLOR, "D8");
+
+        createPiece(Bishop.NAME, Piece.WHITE_COLOR, "C1");
+        createPiece(Bishop.NAME, Piece.WHITE_COLOR, "F1");
+        createPiece(Bishop.NAME, Piece.BLACK_COLOR, "C8");
+        createPiece(Bishop.NAME, Piece.BLACK_COLOR, "F8");
+
+        createPiece(Knight.NAME, Piece.WHITE_COLOR, "B1");
+        createPiece(Knight.NAME, Piece.WHITE_COLOR, "G1");
+        createPiece(Knight.NAME, Piece.BLACK_COLOR, "B8");
+        createPiece(Knight.NAME, Piece.BLACK_COLOR, "G8");
+
+        createPiece(Rook.NAME, Piece.WHITE_COLOR, "A1");
+        createPiece(Rook.NAME, Piece.WHITE_COLOR, "H1");
+        createPiece(Rook.NAME, Piece.BLACK_COLOR, "A8");
+        createPiece(Rook.NAME, Piece.BLACK_COLOR, "H8");
+
     }
 
     /**
@@ -98,6 +119,10 @@ public class Board {
                 if(color.equals(BLACK_COLOR))
                     return createBlackKnight();
                 return createWhiteKnight();
+            case Bishop.NAME:
+                    if(color.equals(BLACK_COLOR))
+                        return createBlackBishop();
+                    return createWhiteBishop();
         }
         return null;
     }
@@ -147,17 +172,14 @@ public class Board {
     }
 
 
-    public String print() {
+    public String showBoard() {
         StringBuilder sb = new StringBuilder();
         for(int i = 0; i < BOARD_COL; i++) {
             String s = "";
             for(int j = 0; j < BOARD_ROW; j++) {
                 s += board[i][j];
             }
-            if(i == BOARD_COL-1)
-                sb.append(s);
-            else
-                sb.append(appendNewLine(s));
+            sb.append(appendNewLine(s));
         }
         return sb.toString();
     }
@@ -199,4 +221,12 @@ public class Board {
         return true;
     }
 
+
+    /**
+     * 전체 기물 카운트
+     * @return 기물 갯수
+     */
+    public int pieceCount() {
+        return blackPiece.size() + whitePiece.size();
+    }
 }
