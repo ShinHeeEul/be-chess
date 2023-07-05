@@ -1,30 +1,20 @@
 package softeer2nd.chess.pieces;
 
 
+import static softeer2nd.chess.pieces.Piece.Color.*;
+
 public class Pawn extends Piece{
-    public static final String NAME = "pawn";
-    public static final char WHITE_PAWN_REPRESENTATION = 'p';
-    public static final char BLACK_PAWN_REPRESENTATION = 'P';
-    private Pawn(final String color, String name) {
+    private Pawn(final Color color, Type type) {
         this.color = color;
-        this.name = name;
+        this.type = type;
     }
 
     public static Pawn createWhitePawn() {
-        return new Pawn(WHITE_COLOR, NAME);
+        return new Pawn(WHITE, Type.PAWN);
     }
 
     public static Pawn createBlackPawn() {
-        return new Pawn(BLACK_COLOR, NAME);
+        return new Pawn(BLACK, Type.PAWN);
     }
 
-
-
-    @Override
-    public char getRepresentation() {
-        if(this.getColor().equals(BLACK_COLOR)) {
-            return BLACK_PAWN_REPRESENTATION;
-        }
-        return WHITE_PAWN_REPRESENTATION;
-    }
 }

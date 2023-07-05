@@ -1,29 +1,18 @@
 package softeer2nd.chess.pieces;
 
+import static softeer2nd.chess.pieces.Piece.Color.*;
 
 public class Knight extends Piece{
-    public static final String NAME = "knight";
-    public static final char WHITE_KNIGHT_REPRESENTATION = 'n';
-    public static final char BLACK_KNIGHT_REPRESENTATION = 'N';
-    private Knight(final String color, String name) {
+    private Knight(final Color color, Type type) {
         this.color = color;
-        this.name = name;
+        this.type = type;
     }
 
     public static Knight createWhiteKnight() {
-        return new Knight(WHITE_COLOR, NAME);
+        return new Knight(WHITE, Type.KNIGHT);
     }
 
     public static Knight createBlackKnight() {
-        return new Knight(BLACK_COLOR, NAME);
-    }
-
-
-    @Override
-    public char getRepresentation() {
-        if(this.getColor().equals(BLACK_COLOR)) {
-            return BLACK_KNIGHT_REPRESENTATION;
-        }
-        return WHITE_KNIGHT_REPRESENTATION;
+        return new Knight(BLACK, Type.KNIGHT);
     }
 }

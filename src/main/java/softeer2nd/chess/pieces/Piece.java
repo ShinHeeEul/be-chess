@@ -1,36 +1,56 @@
 package softeer2nd.chess.pieces;
 
-
+import static softeer2nd.chess.pieces.Piece.Color.*;
 
 public abstract class Piece {
 
-    public static final String WHITE_COLOR = "white";
-    public static final String BLACK_COLOR = "black";
+    public enum Color {
+        WHITE, BLACK, EMPTY
+    }
+
+
     public static final char ROW_ALPHABET = 'a';
-    protected String color;
-    protected String name;
+    public static final char COL_ALPHABET = '0';
+    protected Color color;
     protected String location = "";
+    protected Type type;
 
 
-    public String getColor() {
+    public Color getColor() {
         return this.color;
     }
 
     public boolean isBlack() {
-        return this.color.equals(BLACK_COLOR)?true:false;
+
+        return this.color.equals(BLACK)?true:false;
     }
 
     public boolean isWhite() {
-        return this.color.equals(WHITE_COLOR)?true:false;
+        return this.color.equals(WHITE)?true:false;
+    }
+
+    public boolean isEmpty() {
+        return this.color.equals(EMPTY)?true:false;
+    }
+
+    public Type getType() {
+        return this.type;
     }
 
     public void setLocation(String location) {
+
         this.location = location;
     }
     public String getLocation() {
+
         return this.location;
     }
 
-    public abstract char getRepresentation();
+    public char getRepresentation() {
+        if(this.color.equals(BLACK)) {
+            return type.getBlackRepresentation();
+        }
+        return type.getWhiteRepresentation();
+    }
 
 }

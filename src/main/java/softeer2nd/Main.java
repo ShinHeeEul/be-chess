@@ -1,6 +1,6 @@
 package softeer2nd;
 
-import softeer2nd.chess.Board;
+import softeer2nd.chess.boards.Board;
 
 import java.util.Scanner;
 

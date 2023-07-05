@@ -1,29 +1,21 @@
 package softeer2nd.chess.pieces;
 
 
+import static softeer2nd.chess.pieces.Piece.Color.*;
+
 public class Rook extends Piece{
-    public static final String NAME = "rook";
-    public static final char WHITE_ROOK_REPRESENTATION = 'r';
-    public static final char BLACK_ROOK_REPRESENTATION = 'R';
-    private Rook(final String color, String name) {
+
+    private Rook(final Color color, Type type) {
         this.color = color;
-        this.name = name;
+        this.type = type;
     }
 
     public static Rook createWhiteRook() {
-        return new Rook(WHITE_COLOR, NAME);
+        return new Rook(WHITE, Type.ROOK);
     }
 
     public static Rook createBlackRook() {
-        return new Rook(BLACK_COLOR, NAME);
+        return new Rook(BLACK, Type.ROOK);
     }
 
-
-    @Override
-    public char getRepresentation() {
-        if(this.getColor().equals(BLACK_COLOR)) {
-            return BLACK_ROOK_REPRESENTATION;
-        }
-        return WHITE_ROOK_REPRESENTATION;
-    }
 }
