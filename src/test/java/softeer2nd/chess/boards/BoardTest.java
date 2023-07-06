@@ -3,7 +3,8 @@ package softeer2nd.chess.boards;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import softeer2nd.chess.boards.Board;
+import softeer2nd.chess.pieces.Piece;
+import softeer2nd.chess.pieces.Type;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static softeer2nd.utils.StringUtils.appendNewLine;
@@ -15,12 +16,12 @@ public class BoardTest {
     @BeforeEach
     public void before() {
         board = new Board();
+        board.initialize();
     }
 
     @Test
     @DisplayName("Board Create Validation")
     public void create() {
-        board.initialize();
         assertEquals(32, board.pieceCount());
         String blankRank = appendNewLine("........");
         assertEquals(
@@ -30,6 +31,18 @@ public class BoardTest {
                         appendNewLine("pppppppp") +
                         appendNewLine("rnbqkbnr"),
                 board.showBoard());
+    }
+
+
+    @Test
+    @DisplayName("기물과 색에 해당하는 기물의 개수를 반환")
+    public void return_piece() {
+        Piece.Color color = Piece.Color.WHITE;
+        Type type = Type.PAWN;
+        assertEquals(8, board.countPieces(color, type));
+
+        type = Type.KING;
+        assertEquals(1, board.countPieces(color, type));
     }
 
 }

@@ -84,20 +84,7 @@ public class Board {
             rank.setPiece(p, row);
     }
 
-    /**
-     * 색에 해당하는 Pieces List의 값들을 String으로 만들어 반환
-     * @param color 색
-     * @return 색에 해당하는 Pieces String 반환
-     */
-    private String getPieces(Color color) {
-        StringBuilder sb = new StringBuilder();
-        List<Piece> pieces = getPieceList(color);
 
-        for(Piece p : pieces) {
-            sb.append(p.getRepresentation());
-        }
-        return sb.toString();
-    }
 
     /**
      * 색에 해당하는 폰 리스트 반환
@@ -170,5 +157,17 @@ public class Board {
      */
     public int pieceCount() {
         return blackPiece.size() + whitePiece.size();
+    }
+
+    public int countPieces(Color color, Type type) {
+        List<Piece> pieces = getPieceList(color);
+        int count = 0;
+        for(Piece piece : pieces) {
+            if(piece.getType().equals(type)) {
+                count++;
+            }
+        }
+
+        return count;
     }
 }
