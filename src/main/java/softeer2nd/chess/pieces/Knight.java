@@ -4,9 +4,7 @@ import static softeer2nd.chess.pieces.Piece.Color.*;
 
 public class Knight extends Piece{
     private Knight(final Color color, Type type) {
-        super();
-        this.color = color;
-        this.type = type;
+        super(color, type, Point.KNIGHT);
     }
 
     public static Knight createWhiteKnight() {

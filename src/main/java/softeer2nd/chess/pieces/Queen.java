@@ -7,9 +7,7 @@ public class Queen extends Piece{
 
 
     private Queen(final Color color, Type type) {
-        super();
-        this.color = color;
-        this.type = type;
+        super(color, type, Point.QUEEN);
     }
 
     public static Queen createWhiteQueen() {

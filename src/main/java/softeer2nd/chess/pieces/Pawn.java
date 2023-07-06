@@ -5,9 +5,7 @@ import static softeer2nd.chess.pieces.Piece.Color.*;
 
 public class Pawn extends Piece{
     private Pawn(final Color color, Type type) {
-        super();
-        this.color = color;
-        this.type = type;
+        super(color, type, Point.PAWN);
     }
 
     public static Pawn createWhitePawn() {

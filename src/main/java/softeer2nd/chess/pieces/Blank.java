@@ -4,17 +4,12 @@ public class Blank extends Piece{
 
 
     private Blank(final Color color, Type type) {
-        super();
-        this.type = type;
-        this.color = color;
+        super(color, type, Point.BLANK);
     }
+
 
     public static Blank createBlank() {
         return new Blank(Color.EMPTY, Type.NO_PIECE);
     }
 
-    @Override
-    public char getRepresentation() {
-        return type.getBlankRepresentation();
-    }
 }

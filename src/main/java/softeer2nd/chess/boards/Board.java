@@ -7,12 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static softeer2nd.chess.pieces.Bishop.*;
-import static softeer2nd.chess.pieces.King.*;
-import static softeer2nd.chess.pieces.Knight.*;
 import static softeer2nd.chess.pieces.Pawn.*;
 import static softeer2nd.chess.pieces.Piece.Color.*;
-import static softeer2nd.chess.pieces.Queen.*;
-import static softeer2nd.chess.pieces.Rook.*;
 import static softeer2nd.chess.boards.BoardSize.*;
 import static softeer2nd.utils.StringUtils.appendNewLine;
 
@@ -20,7 +16,7 @@ public class Board {
 
     private final List<Piece> blackPiece;
     private final List<Piece> whitePiece;
-    private ArrayList<Rank> board;
+    private List<Rank> board;
 
 
     public Board() {
@@ -35,26 +31,26 @@ public class Board {
             createPiece(createWhitePawn(), (char) (ROW_ALPHABET + i) + "" + 2);
             createPiece(createBlackPawn(), (char) (ROW_ALPHABET + i) + "" + 7);
         }
-        createPiece(createWhiteKing(), "e1");
-        createPiece(createBlackKing(), "e8");
+        createPiece(Piece.createPiece(WHITE, Type.KING), "e1");
+        createPiece(Piece.createPiece(BLACK, Type.KING), "e8");
 
-        createPiece(createWhiteQueen(), "d1");
-        createPiece(createBlackQueen(), "d8");
+        createPiece(Piece.createPiece(WHITE, Type.QUEEN), "d1");
+        createPiece(Piece.createPiece(BLACK, Type.QUEEN), "d8");
 
-        createPiece(createWhiteBishop(), "c1");
-        createPiece(createWhiteBishop(), "f1");
-        createPiece(createBlackBishop(), "c8");
-        createPiece(createBlackBishop(), "f8");
+        createPiece(Piece.createPiece(WHITE, Type.BISHOP), "c1");
+        createPiece(Piece.createPiece(WHITE, Type.BISHOP), "f1");
+        createPiece(Piece.createPiece(BLACK, Type.BISHOP), "c8");
+        createPiece(Piece.createPiece(BLACK, Type.BISHOP), "f8");
 
-        createPiece(createWhiteKnight(), "b1");
-        createPiece(createWhiteKnight(), "g1");
-        createPiece(createBlackKnight(), "b8");
-        createPiece(createBlackKnight(), "g8");
+        createPiece(Piece.createPiece(WHITE, Type.KNIGHT), "b1");
+        createPiece(Piece.createPiece(WHITE, Type.KNIGHT), "g1");
+        createPiece(Piece.createPiece(BLACK, Type.KNIGHT), "b8");
+        createPiece(Piece.createPiece(BLACK, Type.KNIGHT), "g8");
 
-        createPiece(createWhiteRook(), "a1");
-        createPiece(createWhiteRook(), "h1");
-        createPiece(createBlackRook(), "a8");
-        createPiece(createBlackRook(), "h8");
+        createPiece(Piece.createPiece(WHITE, Type.ROOK), "a1");
+        createPiece(Piece.createPiece(WHITE, Type.ROOK), "h1");
+        createPiece(Piece.createPiece(BLACK, Type.ROOK), "a8");
+        createPiece(Piece.createPiece(BLACK, Type.ROOK), "h8");
 
     }
 
@@ -64,7 +60,7 @@ public class Board {
      */
     private void createPiece(Piece piece, String location) {
         List<Piece> pieces = getPieceList(piece.getColor());
-        piece.setLocation(location);
+        piece.setPosition(location);
         pieces.add(piece);
         setPieceToBoard(piece);
     }
@@ -135,11 +131,11 @@ public class Board {
         return count;
     }
 
-    public Piece findPiece(String location) {
-        Position position = Position.createPosition(location);
+    public Piece findPiece(String position) {
+        Position pos = new Position(position);
 
-        int row = position.getRow();
-        int col = position.getCol();
+        int row = pos.getRow();
+        int col = pos.getCol();
 
         Rank rank = board.get(col);
 
@@ -148,7 +144,7 @@ public class Board {
 
     public void move(String position, Piece piece) {
 
-        Position pos = Position.createPosition(position);
+        Position pos = new Position(position);
 
         int row = pos.getRow();
         int col = pos.getCol();
@@ -172,5 +168,11 @@ public class Board {
         for(int i = 0; i < COL_MAX; i++) {
             board.add(new Rank());
         }
+    }
+
+    public double caculcatePoint(Color color) {
+        List<Piece> pieces = getPieceList(color);
+
+        return 0.0;
     }
 }

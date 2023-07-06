@@ -6,9 +6,7 @@ import static softeer2nd.chess.pieces.Piece.Color.*;
 public class Rook extends Piece{
 
     private Rook(final Color color, Type type) {
-        super();
-        this.color = color;
-        this.type = type;
+        super(color, type, Point.ROOK);
     }
 
     public static Rook createWhiteRook() {

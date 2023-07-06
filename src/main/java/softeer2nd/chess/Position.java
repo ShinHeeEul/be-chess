@@ -6,11 +6,11 @@ import static softeer2nd.chess.pieces.Piece.ROW_ALPHABET;
 
 public class Position {
 
-    private int row;
-    private int col;
+    private final int row;
+    private final int col;
     private String square;
 
-    private Position(int row, int col) {
+    public Position(int row, int col) {
         this.row = row;
         this.col = col;
         this.square = toSquare(row, col);
@@ -18,20 +18,12 @@ public class Position {
     }
 
 
-    private Position(String square) {
+    public Position(String square) {
         int[] coordinate = toCoordinate(square);
         this.row = coordinate[0];
         this.col = coordinate[1];
         this.square = square;
         validLocation();
-    }
-
-    public static Position createPosition(int row, int col) {
-        return new Position(row, col);
-    }
-
-    public static Position createPosition(String square) {
-        return new Position(square);
     }
 
     /**

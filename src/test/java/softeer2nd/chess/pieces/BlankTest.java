@@ -16,8 +16,8 @@ public class BlankTest {
     }
 
     private void validBlank(Blank blank, Color color, Type type) {
-        assertEquals(blank.color, color);
-        assertEquals(blank.type, type);
+        assertEquals(blank.getColor(), color);
+        assertEquals(blank.getType(), type);
     }
 
 }

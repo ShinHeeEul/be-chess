@@ -13,13 +13,54 @@ public abstract class Piece {
 
     public static final char ROW_ALPHABET = 'a';
     public static final char COL_ALPHABET = '0';
-    protected Color color;
-    protected Position position;
-    protected Type type;
+    private Color color;
+    private Position position;
+    private Type type;
+    private double point;
 
 
     protected Piece() {
-        position = Position.createPosition("a1");
+        position = new Position("a1");
+        point = Point.BLANK;
+    }
+
+    protected Piece(Color color, Type type, double point) {
+        this.color = color;
+        this.position = new Position("a1");
+        this.type = type;
+        this.point = point;
+    }
+
+    public static Piece createBlank(Type type) {
+        if(type.equals(Type.NO_PIECE)) {
+            return Blank.createBlank();
+        }
+         throw new IllegalArgumentException("허용되지 않은 타입 type={"+type.getName()+"}");
+    }
+
+    public static Piece createPiece(Color color, Type type) {
+        switch(type) {
+            case PAWN -> {
+                return color.equals(BLACK)?Pawn.createBlackPawn():Pawn.createWhitePawn();
+            }
+            case KNIGHT -> {
+                return color.equals(BLACK)?Knight.createBlackKnight():Knight.createWhiteKnight();
+            }
+            case QUEEN -> {
+                return color.equals(BLACK)?Queen.createBlackQueen():Queen.createWhiteQueen();
+            }
+            case ROOK -> {
+                return color.equals(BLACK)?Rook.createBlackRook():Rook.createWhiteRook();
+            }
+            case BISHOP -> {
+                return color.equals(BLACK)?Bishop.createBlackBishop():Bishop.createWhiteBishop();
+            }
+            case KING -> {
+                return color.equals(BLACK)?King.createBlackKing():King.createWhiteKing();
+            }
+            default -> throw new IllegalArgumentException("허용되지 않은 타입 type={"+type.getName()+"}");
+
+        }
     }
     public Color getColor() {
         return this.color;
@@ -41,28 +82,36 @@ public abstract class Piece {
         return this.type;
     }
 
-    public void setLocation(String location) {
-        this.position = Position.createPosition(location);
+    public void setPosition(String position) {
+        this.position = new Position(position);
     }
     public Position getPosition() {
-
         return this.position;
     }
 
     public char getRepresentation() {
         if(this.color.equals(BLACK)) {
             return type.getBlackRepresentation();
+        } else if(this.color.equals(EMPTY)) {
+            return type.getBlankRepresentation();
         }
         return type.getWhiteRepresentation();
     }
 
+    public void setPoint(double point) {
+        this.point = point;
+    }
+
+    public double getPoint() {
+        return point;
+    }
+
     @Override
     public boolean equals(Object obj) {
-        Piece piece = (Piece) obj;
-        if(piece.getType() == this.getType()) {
-            return true;
+        if(this.getClass() != obj.getClass()) {
+            return false;
         }
-
-        return false;
+        Piece piece = (Piece) obj;
+        return piece.getType() == this.getType();
     }
 }

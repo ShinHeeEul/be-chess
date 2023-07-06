@@ -2,44 +2,42 @@ package softeer2nd.chess.boards;
 
 import softeer2nd.chess.pieces.Blank;
 import softeer2nd.chess.pieces.Piece;
+import softeer2nd.chess.pieces.Type;
 
 import java.util.ArrayList;
 
 public class Rank {
 
-    ArrayList<Piece> pieceArrayList;
+    ArrayList<Piece> pieces;
 
     public Rank() {
-        pieceArrayList = new ArrayList<>();
+        pieces = new ArrayList<>();
         for(int i = 0; i < BoardSize.ROW_MAX; i++) {
-            pieceArrayList.add(Blank.createBlank());
+            pieces.add(Piece.createBlank(Type.NO_PIECE));
         }
     }
 
     public ArrayList<Piece> getRow() {
-        return pieceArrayList;
+        return pieces;
     }
 
     public void setPiece(Piece p, int row) {
         validRow(row);
-        pieceArrayList.set(row,p);
+        pieces.set(row,p);
     }
 
     public Piece getPiece(int row) {
         validRow(row);
-        return pieceArrayList.get(row);
+        return pieces.get(row);
     }
 
     public boolean contains(Piece p) {
-        if(pieceArrayList.contains(p)) {
-            return true;
-        }
-        return false;
+        return pieces.contains(p);
     }
     
     public int getPieceRow(Piece p) {
         if(contains(p)) {
-            return pieceArrayList.indexOf(p);
+            return pieces.indexOf(p);
         }
         return -1;
     }
@@ -53,8 +51,8 @@ public class Rank {
 
 
     public void removePiece(Piece p) {
-        if(pieceArrayList.contains(p)) {
-            pieceArrayList.set(pieceArrayList.indexOf(p), Blank.createBlank());
+        if(pieces.contains(p)) {
+            pieces.set(pieces.indexOf(p), Blank.createBlank());
         }
     }
 }
