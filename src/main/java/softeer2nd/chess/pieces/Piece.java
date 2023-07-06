@@ -52,4 +52,13 @@ public abstract class Piece {
         return type.getWhiteRepresentation();
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        Piece piece = (Piece) obj;
+        if(piece.getType() == this.getType()) {
+            return true;
+        }
+
+        return false;
+    }
 }

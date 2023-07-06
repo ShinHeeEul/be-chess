@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import softeer2nd.chess.pieces.Piece;
+import softeer2nd.chess.pieces.Rook;
 import softeer2nd.chess.pieces.Type;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -43,6 +44,15 @@ public class BoardTest {
 
         type = Type.KING;
         assertEquals(1, board.countPieces(color, type));
+    }
+
+    @Test
+    public void findPiece() {
+
+        assertEquals(Rook.createBlackRook(), board.findPiece("a8"));
+        assertEquals(Rook.createBlackRook(), board.findPiece("h8"));
+        assertEquals(Rook.createWhiteRook(), board.findPiece("a1"));
+        assertEquals(Rook.createWhiteRook(), board.findPiece("h1"));
     }
 
 }

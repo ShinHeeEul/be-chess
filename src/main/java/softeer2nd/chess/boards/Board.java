@@ -170,4 +170,15 @@ public class Board {
 
         return count;
     }
+
+    public Piece findPiece(String location) {
+
+        int[] coordinate = parseLocation(location);
+
+        int row = coordinate[0];
+        int col = coordinate[1];
+        Rank rank = board.get(col);
+
+        return rank.getPiece(row);
+    }
 }
