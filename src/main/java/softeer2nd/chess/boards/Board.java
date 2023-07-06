@@ -3,9 +3,7 @@ package softeer2nd.chess.boards;
 import softeer2nd.chess.Position;
 import softeer2nd.chess.pieces.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import static softeer2nd.chess.pieces.Bishop.*;
 import static softeer2nd.chess.pieces.Pawn.*;
@@ -198,5 +196,16 @@ public class Board {
         rank = board.get(movePosition.getCol());
         rank.setPiece(piece, movePosition.getRow());
         piece.setPosition(movePosition);
+    }
+
+    public String getSortedList(Color color) {
+        List<Piece> pieces = getPieceList(color);
+        Collections.sort(pieces, new ListComparator());
+        StringBuilder sb = new StringBuilder();
+
+        for(Piece piece : pieces) {
+            sb.append(piece.getRepresentation());
+        }
+        return sb.toString();
     }
 }

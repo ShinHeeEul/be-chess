@@ -1,9 +1,12 @@
 package softeer2nd.chess.boards;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import softeer2nd.chess.pieces.*;
+
+import java.util.List;
 
 import static softeer2nd.chess.pieces.Piece.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -82,6 +85,8 @@ public class BoardTest {
         addPiece("g2", Pawn.createWhitePawn());
         addPiece("e1", Rook.createWhiteRook());
         addPiece("f1", King.createWhiteKing());
+        addPiece("f4",Pawn.createWhitePawn());
+
         System.out.println(board.showBoard());
         assertEquals(15.0, board.calculatePoint(Color.BLACK), 0.01);
         assertEquals(7.0, board.calculatePoint(Color.WHITE), 0.01);
@@ -92,5 +97,22 @@ public class BoardTest {
     private void addPiece(String position, Piece piece) {
         board.move(position, piece);
     }
+
+    @Test
+    @DisplayName("정렬이 되었는지 살펴본다")
+    public void list_sort() {
+        assertEquals(32, board.pieceCount());
+        String blackSort = "QRRBBNNPPPPPPPPK";
+        String whiteSort = "qrrbbnnppppppppk";
+        assertEquals(blackSort, board.getSortedList(Color.BLACK));
+        assertEquals(whiteSort, board.getSortedList(Color.WHITE));
+    }
+
+    @AfterEach
+    public void end() {
+        board.initializeEmpty();
+    }
+
+
 
 }
