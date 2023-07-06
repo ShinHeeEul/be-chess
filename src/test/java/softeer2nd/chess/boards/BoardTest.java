@@ -55,4 +55,18 @@ public class BoardTest {
         assertEquals(Rook.createWhiteRook(), board.findPiece("h1"));
     }
 
+    @Test
+    @DisplayName("위치가 변경이 되는지")
+    public void move() throws Exception {
+        board.initializeEmpty();
+
+        String position = "b5";
+        Piece piece = Rook.createBlackRook();
+
+        board.move(position, piece);
+
+        assertEquals(piece, board.findPiece(position));
+        System.out.println(board.showBoard());
+    }
+
 }

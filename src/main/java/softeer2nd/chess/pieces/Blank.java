@@ -4,6 +4,7 @@ public class Blank extends Piece{
 
 
     private Blank(final Color color, Type type) {
+        super();
         this.type = type;
         this.color = color;
     }

@@ -19,16 +19,13 @@ public class Board {
 
     private final List<Piece> blackPiece;
     private final List<Piece> whitePiece;
-    private final ArrayList<Rank> board;
+    private ArrayList<Rank> board;
 
 
     public Board() {
         blackPiece = new ArrayList<>();
         whitePiece = new ArrayList<>();
-        board = new ArrayList<>();
-        for(int i = 0; i < ROW_MAX; i++) {
-            board.add(new Rank());
-        }
+        initializeEmpty();
     }
 
 
@@ -180,5 +177,33 @@ public class Board {
         Rank rank = board.get(col);
 
         return rank.getPiece(row);
+    }
+
+    public void move(String position, Piece piece) {
+
+        int[] coordinate = parseLocation(position);
+
+        int row = coordinate[0];
+        int col = coordinate[1];
+
+        for(int i = 0; i < COL_MAX; i++) {
+            Rank rank = board.get(i);
+            if(rank.contains(piece)) {
+                rank.removePiece(piece);
+                break;
+            }
+        }
+
+        Rank rank = board.get(col);
+        rank.setPiece(piece, row);
+
+
+    }
+
+    public void initializeEmpty() {
+        board = new ArrayList<>();
+        for(int i = 0; i < COL_MAX; i++) {
+            board.add(new Rank());
+        }
     }
 }

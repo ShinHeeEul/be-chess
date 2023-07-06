@@ -12,10 +12,13 @@ public abstract class Piece {
     public static final char ROW_ALPHABET = 'a';
     public static final char COL_ALPHABET = '0';
     protected Color color;
-    protected String location = "";
+    protected String location;
     protected Type type;
 
 
+    protected Piece() {
+        location = "a1";
+    }
     public Color getColor() {
         return this.color;
     }

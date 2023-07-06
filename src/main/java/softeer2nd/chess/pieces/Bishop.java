@@ -4,6 +4,7 @@ import static softeer2nd.chess.pieces.Piece.Color.*;
 
 public class Bishop extends Piece{
     private Bishop(final Color color, Type type) {
+        super();
         this.color = color;
         this.type = type;
     }

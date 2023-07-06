@@ -26,8 +26,24 @@ public class Rank {
     }
 
     public Piece getPiece(int row) {
+        validRow(row);
         return pieceArrayList.get(row);
     }
+
+    public boolean contains(Piece p) {
+        if(pieceArrayList.contains(p)) {
+            return true;
+        }
+        return false;
+    }
+    
+    public int getPieceRow(Piece p) {
+        if(contains(p)) {
+            return pieceArrayList.indexOf(p);
+        }
+        return -1;
+    }
+    
 
     private void validRow(int row) {
         if((row < BoardSize.ROW_MIN) || (row > BoardSize.ROW_MAX)) {
@@ -36,4 +52,9 @@ public class Rank {
     }
 
 
+    public void removePiece(Piece p) {
+        if(pieceArrayList.contains(p)) {
+            pieceArrayList.set(pieceArrayList.indexOf(p), Blank.createBlank());
+        }
+    }
 }
