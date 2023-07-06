@@ -1,5 +1,6 @@
 package softeer2nd.chess.boards;
 
+import softeer2nd.chess.Position;
 import softeer2nd.chess.pieces.*;
 
 import java.util.ArrayList;
@@ -73,12 +74,13 @@ public class Board {
      * @param p 생성된 피스
      */
     private void setPieceToBoard(Piece p) {
-            int[] coordinate = parseLocation(p.getLocation());
-            int row = coordinate[0];
-            int col = coordinate[1];
+        Position position = p.getPosition();
 
-            Rank rank = board.get(col);
-            rank.setPiece(p, row);
+        int row = position.getRow();
+        int col = position.getCol();
+
+        Rank rank = board.get(col);
+        rank.setPiece(p, row);
     }
 
 
@@ -112,41 +114,6 @@ public class Board {
         return sb.toString();
     }
 
-    /**
-     * 저장된 위치정보를 실질적인 위치로 변환
-     * @param location Pawn에 저장된 위치정보
-     * @return {행, 열} 반환
-     */
-
-    private int[] parseLocation(String location) {
-        int row;
-        int col;
-        validLocation(location);
-
-        row = location.charAt(0) - ROW_ALPHABET;
-        col = COL_MAX - Integer.parseInt(location.charAt(1) + "");
-
-        return new int[] {row, col};
-    }
-
-    /**
-     * 유효 좌표값인지 검증 함수
-     * @param location 기물 위치
-     */
-    private void validLocation(String location) {
-        if(location.length() != 2) {
-            throw new IllegalArgumentException("비정상적인 위치값 : location이 두글자가 아님");
-        }
-        int row = location.charAt(0) - ROW_ALPHABET;
-        if((row >= ROW_MAX) || (row < ROW_MIN)) {
-            throw new IllegalArgumentException("비정상적인 위치값 : location의 row 이상 row={"+row+"}");
-        }
-        int col = COL_MAX - (location.charAt(1) - COL_ALPHABET);
-        if((col >= COL_MAX) || (col < COL_MIN)) {
-            throw new IllegalArgumentException("비정상적인 위치값 : location의 col 이상 col={"+col+"}");
-        }
-    }
-
 
     /**
      * 전체 기물 카운트
@@ -169,11 +136,11 @@ public class Board {
     }
 
     public Piece findPiece(String location) {
+        Position position = Position.createPosition(location);
 
-        int[] coordinate = parseLocation(location);
+        int row = position.getRow();
+        int col = position.getCol();
 
-        int row = coordinate[0];
-        int col = coordinate[1];
         Rank rank = board.get(col);
 
         return rank.getPiece(row);
@@ -181,10 +148,10 @@ public class Board {
 
     public void move(String position, Piece piece) {
 
-        int[] coordinate = parseLocation(position);
+        Position pos = Position.createPosition(position);
 
-        int row = coordinate[0];
-        int col = coordinate[1];
+        int row = pos.getRow();
+        int col = pos.getCol();
 
         for(int i = 0; i < COL_MAX; i++) {
             Rank rank = board.get(i);

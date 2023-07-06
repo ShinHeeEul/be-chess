@@ -1,5 +1,7 @@
 package softeer2nd.chess.pieces;
 
+import softeer2nd.chess.Position;
+
 import static softeer2nd.chess.pieces.Piece.Color.*;
 
 public abstract class Piece {
@@ -12,12 +14,12 @@ public abstract class Piece {
     public static final char ROW_ALPHABET = 'a';
     public static final char COL_ALPHABET = '0';
     protected Color color;
-    protected String location;
+    protected Position position;
     protected Type type;
 
 
     protected Piece() {
-        location = "a1";
+        position = Position.createPosition("a1");
     }
     public Color getColor() {
         return this.color;
@@ -40,12 +42,11 @@ public abstract class Piece {
     }
 
     public void setLocation(String location) {
-
-        this.location = location;
+        this.position = Position.createPosition(location);
     }
-    public String getLocation() {
+    public Position getPosition() {
 
-        return this.location;
+        return this.position;
     }
 
     public char getRepresentation() {
