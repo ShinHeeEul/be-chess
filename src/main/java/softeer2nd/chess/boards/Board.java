@@ -3,7 +3,6 @@ package softeer2nd.chess.boards;
 import softeer2nd.chess.pieces.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static softeer2nd.chess.pieces.Bishop.*;
@@ -13,32 +12,28 @@ import static softeer2nd.chess.pieces.Pawn.*;
 import static softeer2nd.chess.pieces.Piece.Color.*;
 import static softeer2nd.chess.pieces.Queen.*;
 import static softeer2nd.chess.pieces.Rook.*;
+import static softeer2nd.chess.boards.BoardSize.*;
 import static softeer2nd.utils.StringUtils.appendNewLine;
 
 public class Board {
 
-    private static final int BOARD_ROW = 8;
-    private static final int BOARD_COL = 8;
-    public static final char EMPTY = '.';
-
     private final List<Piece> blackPiece;
     private final List<Piece> whitePiece;
-    private final char[][] board;
+    private final ArrayList<Rank> board;
 
 
     public Board() {
         blackPiece = new ArrayList<>();
         whitePiece = new ArrayList<>();
-
-        board = new char[BOARD_COL][BOARD_ROW];
-        for(int i = 0; i < BOARD_COL; i++) {
-            Arrays.fill(board[i], EMPTY);
+        board = new ArrayList<>();
+        for(int i = 0; i < ROW_MAX; i++) {
+            board.add(new Rank());
         }
     }
 
 
     public void initialize() {
-        for(int i = 0; i < BOARD_COL; i++) {
+        for(int i = 0; i < COL_MAX; i++) {
             createPiece(createWhitePawn(), (char) (ROW_ALPHABET + i) + "" + 2);
             createPiece(createBlackPawn(), (char) (ROW_ALPHABET + i) + "" + 7);
         }
@@ -84,7 +79,9 @@ public class Board {
             int[] coordinate = parseLocation(p.getLocation());
             int row = coordinate[0];
             int col = coordinate[1];
-            board[col][row] = p.getRepresentation();
+
+            Rank rank = board.get(col);
+            rank.setPiece(p, row);
     }
 
     /**
@@ -119,10 +116,12 @@ public class Board {
      */
     public String showBoard() {
         StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < BOARD_COL; i++) {
+        for(int i = 0; i < COL_MAX; i++) {
             String s = "";
-            for(int j = 0; j < BOARD_ROW; j++) {
-                s += board[i][j];
+            Rank rank = board.get(i);
+            for(int j = 0; j < ROW_MAX; j++) {
+                Piece p = rank.getPiece(j);
+                s += p.getRepresentation();
             }
             sb.append(appendNewLine(s));
         }
@@ -141,7 +140,7 @@ public class Board {
         validLocation(location);
 
         row = location.charAt(0) - ROW_ALPHABET;
-        col = BOARD_COL - Integer.parseInt(location.charAt(1) + "");
+        col = COL_MAX - Integer.parseInt(location.charAt(1) + "");
 
         return new int[] {row, col};
     }
@@ -155,11 +154,11 @@ public class Board {
             throw new IllegalArgumentException("비정상적인 위치값 : location이 두글자가 아님");
         }
         int row = location.charAt(0) - ROW_ALPHABET;
-        if((row >= BOARD_ROW) || (row < 0)) {
+        if((row >= ROW_MAX) || (row < ROW_MIN)) {
             throw new IllegalArgumentException("비정상적인 위치값 : location의 row 이상 row={"+row+"}");
         }
-        int col = BOARD_COL - (location.charAt(1) - COL_ALPHABET);
-        if((col >= BOARD_COL) || (col < 0)) {
+        int col = COL_MAX - (location.charAt(1) - COL_ALPHABET);
+        if((col >= COL_MAX) || (col < COL_MIN)) {
             throw new IllegalArgumentException("비정상적인 위치값 : location의 col 이상 col={"+col+"}");
         }
     }
@@ -170,7 +169,6 @@ public class Board {
      * @return 기물 갯수
      */
     public int pieceCount() {
-
         return blackPiece.size() + whitePiece.size();
     }
 }

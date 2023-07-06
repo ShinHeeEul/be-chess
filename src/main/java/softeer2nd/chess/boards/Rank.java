@@ -25,11 +25,14 @@ public class Rank {
         pieceArrayList.set(row,p);
     }
 
+    public Piece getPiece(int row) {
+        return pieceArrayList.get(row);
+    }
+
     private void validRow(int row) {
         if((row < BoardSize.ROW_MIN) || (row > BoardSize.ROW_MAX)) {
             throw new IndexOutOfBoundsException("경 값이 범위 밖 : row={" + row + "}");
         }
-        return;
     }
 
 

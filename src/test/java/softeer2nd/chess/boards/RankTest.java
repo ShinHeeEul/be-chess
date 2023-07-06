@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import softeer2nd.chess.pieces.Pawn;
 import softeer2nd.chess.pieces.Piece;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -47,6 +48,14 @@ class RankTest {
     public void valid_check() {
         Assertions.assertThrows(IndexOutOfBoundsException.class, () -> addPiece(p, LOW_ROW));
         Assertions.assertThrows(IndexOutOfBoundsException.class, () -> addPiece(p, HIGH_ROW));
+    }
+
+
+    @Test
+    @DisplayName("값이 가져와 지는지?")
+    public void get_piece() {
+        addPiece(p, ROW);
+        Assertions.assertEquals(p, rank.getPiece(ROW));
     }
 
 
