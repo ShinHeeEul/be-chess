@@ -7,10 +7,8 @@ import org.junit.jupiter.api.Test;
 import softeer2nd.chess.pieces.Pawn;
 import softeer2nd.chess.pieces.Piece;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 class RankTest {
     Rank rank;
@@ -32,8 +30,7 @@ class RankTest {
 
     private ArrayList<Piece> addPiece(Piece p, final int row) {
         rank.setPiece(p, row);
-        ArrayList<Piece> arr = rank.getRow();
-        return arr;
+        return rank.getRow();
     }
 
     @Test

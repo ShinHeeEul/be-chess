@@ -1,7 +1,5 @@
 package softeer2nd.chess;
 
-import softeer2nd.chess.pieces.Type;
-
 import static softeer2nd.chess.boards.BoardSize.*;
 import static softeer2nd.chess.pieces.Piece.COL_ALPHABET;
 import static softeer2nd.chess.pieces.Piece.ROW_ALPHABET;

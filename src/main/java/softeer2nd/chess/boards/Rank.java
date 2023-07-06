@@ -1,7 +1,6 @@
 package softeer2nd.chess.boards;
 
 import softeer2nd.chess.pieces.Blank;
-import softeer2nd.chess.pieces.Pawn;
 import softeer2nd.chess.pieces.Piece;
 import softeer2nd.chess.pieces.Type;
 
