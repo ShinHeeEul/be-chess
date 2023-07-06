@@ -70,7 +70,7 @@ public class BoardTest {
 
     @Test
     @DisplayName("포인트 계산")
-    public void caculcate_point() {
+    public void cal_point() {
         board.initializeEmpty();
 
         addPiece("b6", Pawn.createBlackPawn());
@@ -82,9 +82,9 @@ public class BoardTest {
         addPiece("g2", Pawn.createWhitePawn());
         addPiece("e1", Rook.createWhiteRook());
         addPiece("f1", King.createWhiteKing());
-
-        //assertEquals(15.0, board.caculcatePoint(Color.BLACK), 0.01);
-        //assertEquals(7.0, board.caculcatePoint(Color.WHITE), 0.01);
+        System.out.println(board.showBoard());
+        assertEquals(15.0, board.calculatePoint(Color.BLACK), 0.01);
+        assertEquals(7.0, board.calculatePoint(Color.WHITE), 0.01);
 
         System.out.println(board.showBoard());
     }

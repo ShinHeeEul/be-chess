@@ -1,15 +1,22 @@
 package softeer2nd.chess;
 
+import softeer2nd.chess.pieces.Type;
+
 import static softeer2nd.chess.boards.BoardSize.*;
 import static softeer2nd.chess.pieces.Piece.COL_ALPHABET;
 import static softeer2nd.chess.pieces.Piece.ROW_ALPHABET;
 
 public class Position {
-
+    private final String NOT_IN_BOARD = "not in board";
     private final int row;
     private final int col;
     private String square;
 
+    public Position() {
+        this.row = -1;
+        this.col = -1;
+        this.square = NOT_IN_BOARD;
+    }
     public Position(int row, int col) {
         this.row = row;
         this.col = col;
@@ -50,7 +57,10 @@ public class Position {
     }
 
     private void validLocation() {
-        if(square.length() != 2) {
+        if(square.equals(NOT_IN_BOARD)) {
+            return;
+        }
+        if((square.length() != 2)) {
             throw new IllegalArgumentException("비정상적인 위치값 : location이 두글자가 아님 location={"+square+"}");
         }
         char alphabet = square.charAt(0);

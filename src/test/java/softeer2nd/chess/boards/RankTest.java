@@ -62,7 +62,7 @@ class RankTest {
     @DisplayName("Type을 기준으로 Piece의 좌표를 반환해주는지?")
     public void get_piece_location() {
         addPiece(p, ROW);
-        Assertions.assertEquals(ROW, rank.getPieceRow(p));
+        Assertions.assertEquals(ROW, rank.getPieceIndex(p));
     }
 
 

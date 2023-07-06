@@ -4,6 +4,7 @@ import softeer2nd.chess.Position;
 import softeer2nd.chess.pieces.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static softeer2nd.chess.pieces.Bishop.*;
@@ -60,7 +61,7 @@ public class Board {
      */
     private void createPiece(Piece piece, String location) {
         List<Piece> pieces = getPieceList(piece.getColor());
-        piece.setPosition(location);
+        piece.setPosition(new Position(location));
         pieces.add(piece);
         setPieceToBoard(piece);
     }
@@ -142,37 +143,60 @@ public class Board {
         return rank.getPiece(row);
     }
 
-    public void move(String position, Piece piece) {
 
-        Position pos = new Position(position);
-
-        int row = pos.getRow();
-        int col = pos.getCol();
-
-        for(int i = 0; i < COL_MAX; i++) {
-            Rank rank = board.get(i);
-            if(rank.contains(piece)) {
-                rank.removePiece(piece);
-                break;
-            }
-        }
-
-        Rank rank = board.get(col);
-        rank.setPiece(piece, row);
-
-
-    }
 
     public void initializeEmpty() {
+        blackPiece.clear();
+        whitePiece.clear();
         board = new ArrayList<>();
         for(int i = 0; i < COL_MAX; i++) {
             board.add(new Rank());
         }
     }
 
-    public double caculcatePoint(Color color) {
+    public double calculatePoint(Color color) {
         List<Piece> pieces = getPieceList(color);
 
-        return 0.0;
+        double totalPoint = 0;
+        for(Piece piece : pieces) {
+            totalPoint += piece.getPoint();
+        }
+
+        return totalPoint - minusFilePawn(color);
+    }
+
+    private double minusFilePawn(Color color) {
+        HashMap<Character, Integer> map = new HashMap<>();
+        for(int i = 0; i < COL_MAX; i++) {
+            Rank rank = board.get(i);
+            map = rank.getPawnCol(map, color);
+        }
+        int tmpPoint = 0;
+        for(char key : map.keySet()) {
+            int i = map.get(key);
+            if(i > 1) {
+                tmpPoint += i * Point.FILE_PAWN;
+            }
+        }
+
+        return tmpPoint;
+    }
+
+    public void move(String position, Piece piece) {
+        Position movePosition = new Position(position);
+        Position piecePosition = piece.getPosition();
+
+        Rank rank;
+        if(piecePosition.getCol() != -1) {
+            rank = board.get(piecePosition.getCol());
+            rank.removePiece(piece);
+        } else {
+            List<Piece> pieces = getPieceList(piece.getColor());
+            pieces.add(piece);
+        }
+
+        rank = board.get(movePosition.getCol());
+        rank.setPiece(piece, movePosition.getRow());
+        piece.setPosition(movePosition);
     }
 }

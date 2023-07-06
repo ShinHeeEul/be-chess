@@ -1,10 +1,12 @@
 package softeer2nd.chess.boards;
 
 import softeer2nd.chess.pieces.Blank;
+import softeer2nd.chess.pieces.Pawn;
 import softeer2nd.chess.pieces.Piece;
 import softeer2nd.chess.pieces.Type;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Rank {
 
@@ -35,7 +37,7 @@ public class Rank {
         return pieces.contains(p);
     }
     
-    public int getPieceRow(Piece p) {
+    public int getPieceIndex(Piece p) {
         if(contains(p)) {
             return pieces.indexOf(p);
         }
@@ -54,5 +56,20 @@ public class Rank {
         if(pieces.contains(p)) {
             pieces.set(pieces.indexOf(p), Blank.createBlank());
         }
+    }
+
+
+    public HashMap<Character, Integer> getPawnCol(HashMap<Character, Integer> map, Piece.Color color) {
+        for(Piece piece : pieces) {
+            if(piece.getColor().equals(color) && piece.getType().equals(Type.PAWN)) {
+                String square = piece.getPosition().getSquare();
+                char col = square.charAt(0);
+                if(map.get(col) == null) {
+                    map.put(col, 0);
+                }
+                map.put(col, map.get(col)+1);
+            }
+        }
+        return map;
     }
 }

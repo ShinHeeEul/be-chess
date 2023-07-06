@@ -16,17 +16,17 @@ public abstract class Piece {
     private Color color;
     private Position position;
     private Type type;
-    private double point;
+    private final double point;
 
 
     protected Piece() {
-        position = new Position("a1");
+        this.position = new Position();
         point = Point.BLANK;
     }
 
     protected Piece(Color color, Type type, double point) {
         this.color = color;
-        this.position = new Position("a1");
+        this.position = new Position();
         this.type = type;
         this.point = point;
     }
@@ -82,8 +82,8 @@ public abstract class Piece {
         return this.type;
     }
 
-    public void setPosition(String position) {
-        this.position = new Position(position);
+    public void setPosition(Position position) {
+        this.position = position;
     }
     public Position getPosition() {
         return this.position;
@@ -98,9 +98,6 @@ public abstract class Piece {
         return type.getWhiteRepresentation();
     }
 
-    public void setPoint(double point) {
-        this.point = point;
-    }
 
     public double getPoint() {
         return point;
