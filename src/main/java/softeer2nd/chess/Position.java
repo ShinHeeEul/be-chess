@@ -5,7 +5,7 @@ import static softeer2nd.chess.pieces.Piece.COL_ALPHABET;
 import static softeer2nd.chess.pieces.Piece.ROW_ALPHABET;
 
 public class Position {
-    private final String NOT_IN_BOARD = "not in board";
+    public static final String NOT_IN_BOARD = "not in board";
     private final int row;
     private final int col;
     private String square;

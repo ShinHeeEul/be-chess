@@ -180,32 +180,26 @@ public class Board {
         return tmpPoint;
     }
 
-    public void move(String position, Piece piece) {
-        Position movePosition = new Position(position);
-        Position piecePosition = piece.getPosition();
+    public void move(String sourcePosition, String targetPosition) {
+        Piece sourcePiece = findPiece(sourcePosition);
+        Piece targetPiece = findPiece(targetPosition);
 
-        Rank rank;
-        if(piecePosition.getCol() != -1) {
-            rank = board.get(piecePosition.getCol());
-            rank.removePiece(piece);
-        } else {
-            List<Piece> pieces = getPieceList(piece.getColor());
-            pieces.add(piece);
-        }
-
-        rank = board.get(movePosition.getCol());
-        rank.setPiece(piece, movePosition.getRow());
-        piece.setPosition(movePosition);
+        createPiece(sourcePiece, targetPosition);
+        createPiece(targetPiece, sourcePosition);
     }
 
     public String getSortedList(Color color) {
         List<Piece> pieces = getPieceList(color);
-        Collections.sort(pieces, new ListComparator());
+        pieces.sort(new ListComparator());
         StringBuilder sb = new StringBuilder();
 
         for(Piece piece : pieces) {
             sb.append(piece.getRepresentation());
         }
         return sb.toString();
+    }
+
+    public void addPiece(String position, Piece piece) {
+        createPiece(piece, position);
     }
 }

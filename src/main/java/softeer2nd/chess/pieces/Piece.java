@@ -58,6 +58,13 @@ public abstract class Piece {
             case KING -> {
                 return color.equals(BLACK)?King.createBlackKing():King.createWhiteKing();
             }
+            case NO_PIECE -> {
+                if(color.equals(EMPTY)) {
+                    return createBlank(type);
+                } else {
+                    throw new IllegalArgumentException("허용되지 않은 타입 type={"+type.getName()+"}");
+                }
+            }
             default -> throw new IllegalArgumentException("허용되지 않은 타입 type={"+type.getName()+"}");
 
         }

@@ -4,9 +4,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import softeer2nd.chess.Position;
 import softeer2nd.chess.pieces.*;
-
-import java.util.List;
 
 import static softeer2nd.chess.pieces.Piece.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -58,17 +57,19 @@ public class BoardTest {
     }
 
     @Test
-    @DisplayName("위치가 변경이 되는지")
+    @DisplayName("이동이 제대로 되는지 살펴본다.")
     public void move() {
-        board.initializeEmpty();
+        board.initialize();
 
-        String position = "b5";
-        Piece piece = Rook.createBlackRook();
-
-        board.move(position, piece);
-
-        assertEquals(piece, board.findPiece(position));
-        System.out.println(board.showBoard());
+        String sourcePosition = "b2";
+        String targetPosition = "b3";
+        board.move(sourcePosition, targetPosition);
+        Piece sourcePiece = Piece.createPiece(Color.EMPTY, Type.NO_PIECE);
+        Piece tagetPiece = Piece.createPiece(Color.BLACK, Type.PAWN);
+        sourcePiece.setPosition(new Position(sourcePosition));
+        tagetPiece.setPosition(new Position(targetPosition));
+        assertEquals(sourcePiece, board.findPiece(sourcePosition));
+        assertEquals(tagetPiece, board.findPiece(targetPosition));
     }
 
     @Test
@@ -95,7 +96,7 @@ public class BoardTest {
     }
 
     private void addPiece(String position, Piece piece) {
-        board.move(position, piece);
+        board.addPiece(position, piece);
     }
 
     @Test
@@ -107,6 +108,8 @@ public class BoardTest {
         assertEquals(blackSort, board.getSortedList(Color.BLACK));
         assertEquals(whiteSort, board.getSortedList(Color.WHITE));
     }
+
+
 
     @AfterEach
     public void end() {
