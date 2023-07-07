@@ -100,12 +100,19 @@ public class Board {
         for(int i = 0; i < COL_MAX; i++) {
             String s = "";
             Rank rank = board.get(i);
+            // 좌표 열 안내
+            /* s += COL_MAX - i;
+            s += "  "; */
             for(int j = 0; j < ROW_MAX; j++) {
                 Piece p = rank.getPiece(j);
                 s += p.getRepresentation();
             }
             sb.append(appendNewLine(s));
         }
+        //좌표 행 안내
+        /*
+        sb.append(appendNewLine(""));
+        sb.append("   abcdefgh"); */
         return sb.toString();
     }
 
