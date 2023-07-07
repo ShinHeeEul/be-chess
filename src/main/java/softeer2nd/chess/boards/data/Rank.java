@@ -1,5 +1,6 @@
-package softeer2nd.chess.boards;
+package softeer2nd.chess.boards.data;
 
+import softeer2nd.chess.boards.BoardSize;
 import softeer2nd.chess.pieces.Blank;
 import softeer2nd.chess.pieces.Piece;
 import softeer2nd.chess.pieces.Type;

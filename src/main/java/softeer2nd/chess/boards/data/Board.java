@@ -1,4 +1,4 @@
-package softeer2nd.chess.boards;
+package softeer2nd.chess.boards.data;
 
 import softeer2nd.chess.Position;
 import softeer2nd.chess.pieces.*;
@@ -9,19 +9,14 @@ import static softeer2nd.chess.pieces.Bishop.*;
 import static softeer2nd.chess.pieces.Pawn.*;
 import static softeer2nd.chess.pieces.Piece.Color.*;
 import static softeer2nd.chess.boards.BoardSize.*;
-import static softeer2nd.utils.StringUtils.appendNewLine;
 
 public class Board {
 
-    private final List<Piece> blackPiece;
-    private final List<Piece> whitePiece;
     private List<Rank> board;
 
 
     public Board() {
-        blackPiece = new ArrayList<>();
-        whitePiece = new ArrayList<>();
-        initializeEmpty();
+        board = new ArrayList<>();
     }
 
 
@@ -58,9 +53,7 @@ public class Board {
      * @param location 생성 피스 위치
      */
     private void createPiece(Piece piece, String location) {
-        List<Piece> pieces = getPieceList(piece.getColor());
         piece.setPosition(new Position(location));
-        pieces.add(piece);
         setPieceToBoard(piece);
     }
 
@@ -79,64 +72,6 @@ public class Board {
     }
 
 
-
-    /**
-     * 색에 해당하는 폰 리스트 반환
-     * @param color 색
-     * @return 색에 해당하는 폰 리스트
-     */
-    private List<Piece> getPieceList(Color color) {
-        if(color.equals(BLACK)) return blackPiece;
-        return whitePiece;
-    }
-
-
-    /**
-     * 보드를 보여주는 함수
-     * @return 보드를 String으로 표현한 값
-     */
-    public String showBoard() {
-        StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < COL_MAX; i++) {
-            String s = "";
-            Rank rank = board.get(i);
-            // 좌표 열 안내
-            /* s += COL_MAX - i;
-            s += "  "; */
-            for(int j = 0; j < ROW_MAX; j++) {
-                Piece p = rank.getPiece(j);
-                s += p.getRepresentation();
-            }
-            sb.append(appendNewLine(s));
-        }
-        //좌표 행 안내
-        /*
-        sb.append(appendNewLine(""));
-        sb.append("   abcdefgh"); */
-        return sb.toString();
-    }
-
-
-    /**
-     * 전체 기물 카운트
-     * @return 기물 갯수
-     */
-    public int pieceCount() {
-        return blackPiece.size() + whitePiece.size();
-    }
-
-    public int countPieces(Color color, Type type) {
-        List<Piece> pieces = getPieceList(color);
-        int count = 0;
-        for(Piece piece : pieces) {
-            if(piece.getType().equals(type)) {
-                count++;
-            }
-        }
-
-        return count;
-    }
-
     public Piece findPiece(String position) {
         Position pos = new Position(position);
 
@@ -148,29 +83,16 @@ public class Board {
         return rank.getPiece(row);
     }
 
-
-
     public void initializeEmpty() {
-        blackPiece.clear();
-        whitePiece.clear();
         board = new ArrayList<>();
         for(int i = 0; i < COL_MAX; i++) {
             board.add(new Rank());
         }
     }
 
-    public double calculatePoint(Color color) {
-        List<Piece> pieces = getPieceList(color);
 
-        double totalPoint = 0;
-        for(Piece piece : pieces) {
-            totalPoint += piece.getPoint();
-        }
 
-        return totalPoint - minusFilePawn(color);
-    }
-
-    private double minusFilePawn(Color color) {
+    public double minusFilePawn(Color color) {
         HashMap<Character, Integer> map = new HashMap<>();
         for(int i = 0; i < COL_MAX; i++) {
             Rank rank = board.get(i);
@@ -187,26 +109,11 @@ public class Board {
         return tmpPoint;
     }
 
-    public void move(String sourcePosition, String targetPosition) {
-        Piece sourcePiece = findPiece(sourcePosition);
-        Piece targetPiece = findPiece(targetPosition);
-
-        createPiece(sourcePiece, targetPosition);
-        createPiece(targetPiece, sourcePosition);
-    }
-
-    public String getSortedList(Color color) {
-        List<Piece> pieces = getPieceList(color);
-        pieces.sort(new ListComparator());
-        StringBuilder sb = new StringBuilder();
-
-        for(Piece piece : pieces) {
-            sb.append(piece.getRepresentation());
-        }
-        return sb.toString();
-    }
-
     public void addPiece(String position, Piece piece) {
         createPiece(piece, position);
+    }
+
+    public Rank getRank(int i) {
+        return board.get(i);
     }
 }
